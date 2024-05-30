@@ -17,11 +17,11 @@ export function middleware(req: NextRequest) {
 	const isLoginPage = req.nextUrl.pathname.startsWith("/login");
 
 	if (isLoginPage && token?.value) {
-		return NextResponse.redirect(new URL("/dashboard", req.url));
-	}
-
-	if (isDashboardPage && !token?.value && !isLoginPage) {
+		return NextResponse.redirect(new URL("/home", req.url));
+	} else if (isDashboardPage && !token?.value && !isLoginPage) {
 		return NextResponse.redirect(new URL("/login", req.url));
+	} else if (token && !isLoginPage) {
+		return res;
 	}
 
 	return res;

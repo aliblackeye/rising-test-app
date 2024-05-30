@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 	description: "A Next.js app with TypeScript and Tailwind CSS",
 };
 
-export default function RootLayout({
+export default function WwwLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;

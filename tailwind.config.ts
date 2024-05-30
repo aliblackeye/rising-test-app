@@ -5,6 +5,7 @@ const config = {
 	content: [
 		"./components/**/*.{ts,tsx}",
 		"./providers/**/*.{ts,tsx}",
+		"./layouts/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 	],
 	prefix: "",

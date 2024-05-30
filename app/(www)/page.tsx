@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
-	redirect("/dashboard");
+export const metadata: Metadata = {
+	title: "Dashboard | Rising",
+};
+
+export default async function Dashboard() {
+	redirect("/home");
 }
