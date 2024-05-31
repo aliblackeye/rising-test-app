@@ -14,7 +14,7 @@ export interface LoginResponse {
 }
 
 export const login = async (payload: LoginDto) => {
-	return await createRequest("/login", "POST", payload);
+	return (await createRequest("/login", "POST", payload)) as LoginResponse;
 };
 
 export const logout = () => {

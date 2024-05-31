@@ -27,7 +27,7 @@ export async function createRequest<Type>(
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
-				["Authorization"]: `Bearer ${getCookie("jwt", { cookies })}`,
+				["Authorization"]: `${getCookie("jwt", { cookies })}`,
 			},
 		});
 

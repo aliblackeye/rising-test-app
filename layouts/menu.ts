@@ -27,7 +27,7 @@ export const MENU: MENU[] = [
 	{
 		key: "home",
 		label: "Home",
-		href: "/home",
+		href: "/dashboard",
 		icon: IoHome,
 		pageTitle: "Proxies & Scraping Infrastructure",
 		navigationTabs: [
@@ -39,7 +39,7 @@ export const MENU: MENU[] = [
 			{
 				key: "home-dashboard",
 				label: "Dashboard",
-				href: "/home",
+				href: "/dashboard",
 			},
 		],
 	},

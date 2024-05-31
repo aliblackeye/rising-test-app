@@ -33,7 +33,7 @@ export default function LoginForm() {
 				.then((res) => {
 					localStorage.setItem("jwt", res.jwt);
 					// Redirect to dashboard
-					router.push("/home");
+					router.push("/dashboard");
 				})
 				.catch(() => {});
 		},
