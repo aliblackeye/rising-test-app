@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Hanken_Grotesk } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const grotesk = Hanken_Grotesk({ subsets: ["latin"] });
 import "./globals.css";
 import Providers from "./providers";
 import { Toaster } from "@/components/ui/toaster";
@@ -18,7 +18,7 @@ export default function WwwLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
+			<body className={grotesk.className}>
 				<Providers>{children}</Providers>
 				<Toaster />
 			</body>
