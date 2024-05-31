@@ -6,15 +6,27 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { logout } from "@/lib/actions/auth";
 import { cn } from "@/lib/utils";
-import { CreditCard, DoorClosed, Home, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { IoHome, IoCard, IoPerson, IoLogOutOutline } from "react-icons/io5";
+
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
+
 export default function Sidebar() {
 	const pathname = usePathname();
+
+	const router = useRouter();
 
 	const items = useMemo(
 		() => [
@@ -37,6 +49,11 @@ export default function Sidebar() {
 				name: "Logout",
 				icon: IoLogOutOutline,
 				href: "/logout",
+				onClick: () => {
+					logout().then(() => {
+						router.refresh();
+					});
+				},
 			},
 		],
 		[]
@@ -61,6 +78,7 @@ export default function Sidebar() {
 						<Tooltip key={key}>
 							<TooltipTrigger asChild>
 								<Link
+									onClick={item.onClick}
 									href="#"
 									className={cn(
 										"flex h-[60px] w-[60px] items-center justify-center rounded-2xl text-muted-foreground transition-colors hover:text-[#0c6dfc]/60",
@@ -79,6 +97,18 @@ export default function Sidebar() {
 					))}
 				</TooltipProvider>
 			</nav>
+			<Dialog>
+				<DialogTrigger>Open</DialogTrigger>
+				<DialogContent>
+					<DialogHeader>
+						<DialogTitle>Are you absolutely sure?</DialogTitle>
+						<DialogDescription>
+							This action cannot be undone. This will permanently delete your
+							account and remove your data from our servers.
+						</DialogDescription>
+					</DialogHeader>
+				</DialogContent>
+			</Dialog>
 		</aside>
 	);
 }

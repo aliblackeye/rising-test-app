@@ -30,15 +30,12 @@ export default function LoginForm() {
 	const { isPending, mutateAsync } = useMutation({
 		mutationFn: async (formData: z.infer<typeof formSchema>) => {
 			await login(formData)
-				.then(() => {
-					toast.success("Logged in successfully");
-
+				.then((res) => {
+					localStorage.setItem("jwt", res.jwt);
 					// Redirect to dashboard
-					router.push("/dashboard");
+					router.push("/home");
 				})
-				.catch(() => {
-					toast.error("Invalid username or password");
-				});
+				.catch(() => {});
 		},
 	});
 

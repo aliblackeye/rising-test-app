@@ -13,15 +13,19 @@ export function middleware(req: NextRequest) {
 
 	const token = cookieStore.get("jwt");
 
-	const isDashboardPage = req.nextUrl.pathname.startsWith("/dashboard");
 	const isLoginPage = req.nextUrl.pathname.startsWith("/login");
 
-	if (isLoginPage && token?.value) {
-		return NextResponse.redirect(new URL("/home", req.url));
-	} else if (isDashboardPage && !token?.value && !isLoginPage) {
-		return NextResponse.redirect(new URL("/login", req.url));
-	} else if (token && !isLoginPage) {
-		return res;
+	if (token?.value) {
+		if (isLoginPage) {
+			return NextResponse.redirect(new URL("/home", req.url));
+		}
+	}
+
+	// Token yoksa
+	else {
+		if (!isLoginPage) {
+			return NextResponse.redirect(new URL("/login", req.url));
+		}
 	}
 
 	return res;
