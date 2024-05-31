@@ -23,6 +23,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { useDialogStore } from "@/store/use-dialog-store";
+import MENU from "../menu";
 
 export default function Sidebar() {
 	const pathname = usePathname();
@@ -36,45 +37,9 @@ export default function Sidebar() {
 		setDialogTitle,
 	} = useDialogStore();
 
-	const items = useMemo(
-		() => [
-			{
-				name: "Home",
-				icon: IoHome,
-				href: "/home",
-			},
-			{
-				name: "Payment",
-				icon: IoCard,
-				href: "/payment",
-			},
-			{
-				name: "User",
-				icon: IoPerson,
-				href: "/user",
-			},
-			{
-				name: "Logout",
-				icon: IoLogOutOutline,
-				href: "/logout",
-				onClick: () => {
-					console.log("Logout");
-					setDialogVisible(true);
-					setDialogTitle("Are you logging out?");
-					setDialogDescription("This action cannot be undone.");
-					setDialogConfirm(() => {
-						logout();
-						router.refresh();
-					});
-				},
-			},
-		],
-		[]
-	);
-
 	return (
-		<aside className="fixed inset-y-0 left-0 z-10 w-[98px] flex-col border-r bg-[#f7fafc] sm:flex">
-			<nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
+		<aside className="fixed inset-y-0 left-0 z-10 w-[98px] flex-col border-r bg-[#f7fafc]">
+			<nav className="flex flex-col items-center gap-4 px-2 py-[26px]">
 				<Link
 					href="#"
 					className="group flex h-[55px] w-[54px] items-center justify-center gap-2 mb-[34px]">
@@ -87,11 +52,24 @@ export default function Sidebar() {
 					/>
 				</Link>
 				<TooltipProvider>
-					{items.map((item, key) => (
+					{MENU.map((item, key) => (
 						<Tooltip key={key}>
 							<TooltipTrigger asChild>
 								<Link
-									onClick={item.onClick}
+									onClick={
+										item.key === "logout"
+											? (e) => {
+													console.log("Logout");
+													setDialogVisible(true);
+													setDialogTitle("Are you logging out?");
+													setDialogDescription("This action cannot be undone.");
+													setDialogConfirm(() => {
+														logout();
+														router.refresh();
+													});
+											  }
+											: undefined
+									}
 									href="#"
 									className={cn(
 										"flex h-[60px] w-[60px] items-center justify-center rounded-2xl text-muted-foreground transition-colors hover:text-[#0c6dfc]/60",
@@ -104,7 +82,7 @@ export default function Sidebar() {
 							<TooltipContent
 								side="right"
 								sideOffset={26}>
-								{item.name}
+								{item.label}
 							</TooltipContent>
 						</Tooltip>
 					))}
