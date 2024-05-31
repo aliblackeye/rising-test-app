@@ -27,13 +27,13 @@ const data: ChartData<"line", (number | Point | null)[], unknown> = {
 	labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
 	datasets: [
 		{
-			label: "My First Dataset",
 			data: [1, 3, 5, 10],
 			fill: false,
 			borderColor: "#1C1C1C",
 			borderWidth: 3,
 			tension: 0.4,
 			pointBorderWidth: 0,
+			label: undefined,
 		},
 	],
 };
@@ -50,7 +50,7 @@ export const DataUsagePerNetwork = () => {
 					<div className="h-max w-full">
 						<Line
 							className="w-full"
-							options={{}}
+							options={{ plugins: { legend: { display: false } } }}
 							data={data}
 						/>
 					</div>
