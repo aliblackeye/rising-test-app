@@ -4,9 +4,13 @@ import { X } from "lucide-react";
 import Link from "next/link";
 import { useCallback } from "react";
 
-export default function SpecialOffer() {
+interface SpecialOfferProps {
+	setVisible: (visible: boolean) => void;
+}
+
+export default function SpecialOffer({ setVisible }: SpecialOfferProps) {
 	const handleClose = useCallback(() => {
-		// Todo: Close
+		setVisible(false);
 	}, []);
 	return (
 		<div className="special-offer bg-[#78B6FF]/30 p-4 pl-[22px] pr-[24px] flex justify-between mt-[21px] rounded-[5px] mb-9">

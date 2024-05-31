@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const DataUsagePerNetwork = () => {
 	return (
-		<section className="mb-[39px]">
+		<section className="mb-[39px] w-full">
 			<Card className="h-[443px] p-6">
 				<CardHeader className="!p-0">
 					<CardTitle className="text-xl leading-5 font-extrabold mb-3">

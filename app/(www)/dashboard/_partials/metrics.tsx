@@ -5,7 +5,7 @@ export default async function Metrics() {
 	const info = await dashboardInfo();
 
 	return (
-		<section className="metrics flex gap-[28px] mb-[42px] ">
+		<section className="metrics flex gap-[28px] mb-[42px] flex-wrap justify-center mt-4">
 			<MetricCard
 				title={<span>Subscription expires on</span>}
 				value={<span className="text-2xl">{info.expireTime}</span>}
