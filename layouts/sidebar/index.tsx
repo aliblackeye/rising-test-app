@@ -22,11 +22,19 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
+import { useDialogStore } from "@/store/use-dialog-store";
 
 export default function Sidebar() {
 	const pathname = usePathname();
 
 	const router = useRouter();
+
+	const {
+		setDialogVisible,
+		setDialogConfirm,
+		setDialogDescription,
+		setDialogTitle,
+	} = useDialogStore();
 
 	const items = useMemo(
 		() => [
@@ -50,7 +58,12 @@ export default function Sidebar() {
 				icon: IoLogOutOutline,
 				href: "/logout",
 				onClick: () => {
-					logout().then(() => {
+					console.log("Logout");
+					setDialogVisible(true);
+					setDialogTitle("Are you logging out?");
+					setDialogDescription("This action cannot be undone.");
+					setDialogConfirm(() => {
+						logout();
 						router.refresh();
 					});
 				},
@@ -97,18 +110,6 @@ export default function Sidebar() {
 					))}
 				</TooltipProvider>
 			</nav>
-			<Dialog>
-				<DialogTrigger>Open</DialogTrigger>
-				<DialogContent>
-					<DialogHeader>
-						<DialogTitle>Are you absolutely sure?</DialogTitle>
-						<DialogDescription>
-							This action cannot be undone. This will permanently delete your
-							account and remove your data from our servers.
-						</DialogDescription>
-					</DialogHeader>
-				</DialogContent>
-			</Dialog>
 		</aside>
 	);
 }

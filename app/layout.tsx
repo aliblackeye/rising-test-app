@@ -4,7 +4,7 @@ import { Hanken_Grotesk } from "next/font/google";
 const grotesk = Hanken_Grotesk({ subsets: ["latin"] });
 import "./globals.css";
 import Providers from "./providers";
-import { Toaster } from "@/components/ui/toaster";
+import { ConfirmDialog } from "@/components/confirm-dialog";
 
 export const metadata: Metadata = {
 	title: "Rising",
@@ -20,7 +20,7 @@ export default function WwwLayout({
 		<html lang="en">
 			<body className={grotesk.className}>
 				<Providers>{children}</Providers>
-				<Toaster />
+				<ConfirmDialog />
 			</body>
 		</html>
 	);
