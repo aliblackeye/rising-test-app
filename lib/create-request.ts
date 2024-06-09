@@ -21,7 +21,7 @@ export async function createRequest<Type>(
 ) {
 	try {
 		const res = await axios.request({
-			url,
+			url: process.env.NEXT_PUBLIC_BASE_URL! + url,
 			method,
 			data,
 			headers: {
